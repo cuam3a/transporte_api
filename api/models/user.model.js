@@ -45,5 +45,5 @@ const UserSchema = new mongoose_1.Schema({
     versionKey: false,
     timestamps: true,
 });
-const UserModel = (0, mongoose_1.model)("users_ts", UserSchema);
+const UserModel = (0, mongoose_1.model)("users", UserSchema);
 exports.default = UserModel;
