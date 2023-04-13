@@ -36,6 +36,11 @@ const InspectorSchema = new Schema<Inspector>(
             enum: [ "ADMIN", "INSPECTOR" ],
             required: true,
         },
+        status: {
+            type: String,
+            enum: [ "ACTIVO", "ELIMINADO" ],
+            required: true,
+        },
     },
     {
         versionKey: false,
