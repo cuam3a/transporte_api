@@ -1,22 +1,30 @@
 import { JwtPayload } from "jsonwebtoken";
 import { Request } from "express";
 
-export type User = {
+export type Inspector = {
     id: string
     name: string
-    last_name: string
+    lastName: string
     dni: string
     address: string
-    birth_date: Date
+    birthDate: Date
     gender: string
     user: string
     password: string
     isAdmin: boolean
-    active: boolean
     rol: Rol
+    status: State
   }
 
-export enum Rol { ADMIN = 'ADMIN', SUPERVISOR = 'SUPERVISOR', VENTAS = 'VENTAS' }
+export enum Rol { ADMINISTRADOR = 'ADMINISTRADOR', INSPECTOR = 'INSPECTOR' }
+
+export type InspectorResponse = {
+    status: number
+    token: string
+    data: Partial<Inspector>[] | Partial<Inspector>
+    error: string
+    errorDetail: string
+}
 
 export enum State { ACTIVO = 'ACTIVO', INACTIVO = 'INACTIVO', ELIMINADO = 'ELIMINADO' }
 

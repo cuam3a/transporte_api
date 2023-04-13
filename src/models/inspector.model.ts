@@ -1,13 +1,13 @@
 import { Schema, Types, model, Model } from "mongoose";
-import { User } from "../types";
+import { Inspector } from "../types";
 
-const UserSchema = new Schema<User>(
+const InspectorSchema = new Schema<Inspector>(
     {
         name: {
             required: true,
             type: String,
         },
-        last_name: {
+        lastName: {
             type: String,
         },
         dni: {
@@ -16,7 +16,7 @@ const UserSchema = new Schema<User>(
         address: {
             type: String,
         },
-        birth_date: {
+        birthDate: {
             type: Date,
         },
         gender: {
@@ -26,20 +26,14 @@ const UserSchema = new Schema<User>(
             type: String,
             required: true,
         },
-        isAdmin:{
-            type: Boolean
-        },
         user: {
             type: String,
             required: true,
             unique: true,
         },
-        active: {
-            type: Boolean
-        },
         rol: {
             type: String,
-            enum: ["ADMIN", "SUPERVISOR", "VENTAS"],
+            enum: [ "ADMIN", "INSPECTOR" ],
             required: true,
         },
     },
@@ -49,5 +43,5 @@ const UserSchema = new Schema<User>(
     }
 );
 
-const UserModel = model("users", UserSchema);
-export default UserModel;
+const InspectorModel = model("inspector", InspectorSchema);
+export default InspectorModel;

@@ -1,12 +1,12 @@
-import UserModel from "../models/user.model"
+import InspectorModel from "../models/inspector.model"
 import { encrypt } from "./bcypt.handle"
 
 export const initConfig = async () => {
-    const existAdmin = await UserModel.findOne({ user: "admin" });
+    const existAdmin = await InspectorModel.findOne({ user: "admin" });
     if (existAdmin) return;
     
     const passHash = await encrypt("admin");
-    const admin = await UserModel.create({ name: "admin", user: "admin", password: passHash, active: true, rol: "ADMIN" })
+    const admin = await InspectorModel.create({ name: "admin", user: "admin", password: passHash, rol: "ADMIN" })
     console.log(admin)
     return
 }

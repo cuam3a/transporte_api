@@ -20,7 +20,7 @@ const login = async ({ body }: Request, res: Response) => {
     const userToken = await loginAppService({ user, password });
     const response: LoginResponse = {
       status: 200,
-      token: userToken
+      token: ''
     }
 
     res.send(response);

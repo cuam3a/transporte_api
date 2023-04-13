@@ -1,10 +1,10 @@
-import { User } from "../types"
-import UserModel from "../models/user.model";
+import { Inspector } from "../types"
+import InspectorModel from "../models/inspector.model";
 import { verified } from "../utils/bcypt.handle";
 import { generateToken } from "../utils/jwt.handle";
 
-const loginAppService = async ({ user, password }: Partial<User>) => {
-  const checkIs = await UserModel.findOne({ user });
+const loginAppService = async ({ user, password }: Partial<Inspector>) => {
+  const checkIs = await InspectorModel.findOne({ user });
   if (!checkIs) throw Error("USER OR PASSWORD INCORRECT");
 
   const passwordHash = checkIs.password;
@@ -16,15 +16,6 @@ const loginAppService = async ({ user, password }: Partial<User>) => {
   return token;
 }
 
-const userInformationService = async (id: String) => {
-  const existUser = await UserModel.findOne({ _id: id })
-
-  if(!existUser)throw Error("USER NO FOUND");
-
-  return existUser.name
-}
-
 export {
   loginAppService,
-  userInformationService,
 }
