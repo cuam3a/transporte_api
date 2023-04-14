@@ -15,7 +15,7 @@ const TransportSchema = new Schema<Transport>(
             type: String,
             required: true,
         },
-        idDealerchip: {
+        idDealership: {
             type: String,
         },
         idDriver: {

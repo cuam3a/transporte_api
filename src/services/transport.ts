@@ -3,7 +3,7 @@ import TransportModel from "../models/transport.model";
 import { formatTransportData } from "../utils/modelToType";
 
 const listService = async (s : string) : Promise<Partial<Transport>[]>=> {
-  const transport = await TransportModel.find<Transport>({ status: 'ACTIVO', name: new RegExp(s) }); 
+  const transport = await TransportModel.find<Transport>({ status: 'ACTIVO', plateNumber: new RegExp(s) }); 
   return transport.map(transport => { return formatTransportData(transport) })
 }
 
@@ -19,7 +19,7 @@ const addService = async (Transport : Partial<Transport>) : Promise<Partial<Tran
     plateNumber: Transport.plateNumber,
     soat: Transport.soat,
     nfc: Transport.nfc,
-    idDealerchip: Transport.idDealerchip,
+    idDealership: Transport.idDealership,
     idDriver: Transport.idDriver,
     status: 'ACTIVO'
   });

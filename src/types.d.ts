@@ -109,7 +109,7 @@ export type Driver = {
     plateNumber: string
     soat: string
     nfc: string
-    idDealerchip: string
+    idDealership: string
     idDriver: string
     status: State
   }

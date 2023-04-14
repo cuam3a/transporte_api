@@ -24,7 +24,7 @@ export const formatTransportData = (model: Transport): Partial<Transport> => {
         plateNumber: model.plateNumber,
         soat: model.soat,
         nfc: model.nfc,
-        idDealerchip: model.idDealerchip,
+        idDealership: model.idDealership,
         idDriver: model.idDriver,
         status: model.status,
     }
