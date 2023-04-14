@@ -1,7 +1,7 @@
 import { Schema, Types, model, Model } from "mongoose";
-import { Inspector } from "../types";
+import { Driver } from "../types";
 
-const InspectorSchema = new Schema<Inspector>(
+const DriverSchema = new Schema<Driver>(
     {
         name: {
             required: true,
@@ -14,31 +14,17 @@ const InspectorSchema = new Schema<Inspector>(
             type: String,
             required: true,
         },
-        address: {
+        experience: {
+            type: Number,
+        },
+        phone: {
             type: String,
         },
-        birthDate: {
-            type: Date,
-        },
-        gender: {
+        driveLicense: {
             type: String,
         },
-        email: {
+        city: {
             type: String,
-        },
-        password: {
-            type: String,
-            required: true,
-        },
-        user: {
-            type: String,
-            required: true,
-            unique: true,
-        },
-        rol: {
-            type: String,
-            enum: [ "ADMIN", "INSPECTOR" ],
-            required: true,
         },
         status: {
             type: String,
@@ -52,5 +38,5 @@ const InspectorSchema = new Schema<Inspector>(
     }
 );
 
-const InspectorModel = model("inspector", InspectorSchema);
-export default InspectorModel;
+const DriverModel = model("driver", DriverSchema);
+export default DriverModel;

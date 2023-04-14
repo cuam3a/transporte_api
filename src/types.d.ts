@@ -11,7 +11,7 @@ export type Inspector = {
     gender: string
     user: string
     password: string
-    isAdmin: boolean
+    email: string
     rol: Rol
     status: State
   }
@@ -22,6 +22,30 @@ export type InspectorResponse = {
     status: number
     token: string
     data: Partial<Inspector>[] | Partial<Inspector>
+    error: string
+    errorDetail: string
+}
+
+export type TransportResponse = {
+    status: number
+    token: string
+    data: Partial<Transport>[] | Partial<Transport>
+    error: string
+    errorDetail: string
+}
+
+export type DriverResponse = {
+    status: number
+    token: string
+    data: Partial<Driver>[] | Partial<Driver>
+    error: string
+    errorDetail: string
+}
+
+export type DealershipResponse = {
+    status: number
+    token: string
+    data: Partial<Dealership>[] | Partial<Dealership>
     error: string
     errorDetail: string
 }
@@ -56,8 +80,36 @@ export type GetListResponse = {
     data: any[]
 }
 
-
-
 export interface RequestExt extends Request {
   idUser?: JwtPayload | { idUser: string };
 }
+
+export type Driver = {
+    id: string
+    name: string
+    lastName: string
+    dni: string
+    experience: number
+    phone: string
+    driveLicense: string
+    city: string
+    status: State
+  }
+
+  export type Dealership = {
+    id: string
+    name: string
+    ruc: string
+    email: string
+    status: State
+  }
+
+  export type Transport = {
+    id: string
+    plateNumber: string
+    soat: string
+    nfc: string
+    idDealerchip: string
+    idDriver: string
+    status: State
+  }
