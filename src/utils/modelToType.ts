@@ -10,6 +10,7 @@ export const formatInspectorData = (model: Inspector): Partial<Inspector> => {
         address: model.address,
         birthDate: model.birthDate,
         gender: model.gender,
+        email: model.email,
         user: model.user,
         rol: model.rol,
         status: model.status,
