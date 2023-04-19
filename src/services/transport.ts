@@ -1,20 +1,27 @@
-import { Transport } from "../types"
+import { Transport, Driver, Dealership } from "../types"
 import TransportModel from "../models/transport.model";
-import { formatTransportData } from "../utils/modelToType";
+import { formatDealershipData, formatDriverData, formatTransportData } from "../utils/modelToType";
+import DriverModel from "../models/driver.model";
+import DealershipModel from "../models/dealership.model";
 
-const listService = async (s : string) : Promise<Partial<Transport>[]>=> {
-  const transport = await TransportModel.find<Transport>({ status: 'ACTIVO', plateNumber: new RegExp(s) }); 
-  return transport.map(transport => { return formatTransportData(transport) })
+const listService = async (s: string): Promise<Partial<Transport>[]> => {
+  const transport = await TransportModel.find<Transport>({ status: 'ACTIVO', plateNumber: new RegExp(s) });
+
+  const list = transport.map((transport) => { return formatTransportData({ model: transport }) });
+  return transport.map((transport) => { return formatTransportData({ model: transport }) })
 }
 
-const getByIdService = async (id: string) : Promise<Partial<Transport>> => {
+const getByIdService = async (id: string): Promise<Partial<Transport>> => {
   const transport = await TransportModel.findOne({ _id: id });
-  if(!transport) throw Error("NO FOUND TRANSPORT")
+  if (!transport) throw Error("NO FOUND TRANSPORT")
 
-  return transport;
+  var Driver = await DriverModel.findOne({ _id: transport.idDriver });
+  var Dealership = await DealershipModel.findOne({ _id: transport.idDealership });
+
+  return formatTransportData({ model: transport, driver: formatDriverData(Driver), dealership: formatDealershipData(Dealership) });
 }
 
-const addService = async (Transport : Partial<Transport>) : Promise<Partial<Transport>>=> {
+const addService = async (Transport: Partial<Transport>): Promise<Partial<Transport>> => {
   const newTransport = await TransportModel.create({
     plateNumber: Transport.plateNumber,
     soat: Transport.soat,
@@ -24,29 +31,29 @@ const addService = async (Transport : Partial<Transport>) : Promise<Partial<Tran
     status: 'ACTIVO'
   });
 
-  if(!newTransport) throw Error("ERROR CREATE TRANSPORT")
-  
-  return formatTransportData(newTransport);
+  if (!newTransport) throw Error("ERROR CREATE TRANSPORT")
+
+  return formatTransportData({ model: newTransport });
 }
 
-const editService = async (Transport : Partial<Transport>) :Promise<Partial<Transport>>=> {
+const editService = async (Transport: Partial<Transport>): Promise<Partial<Transport>> => {
   const updateTransport = await TransportModel.findOneAndUpdate({ _id: Transport.id }, Transport, {
     new: true,
   });
 
-  if(!updateTransport) throw Error("NO FOUND TRANSPORT")
-  
-  return formatTransportData(updateTransport);
+  if (!updateTransport) throw Error("NO FOUND TRANSPORT")
+
+  return formatTransportData({ model: updateTransport });
 }
 
-const removeService = async (id: string) :Promise<Partial<Transport>>=> {
+const removeService = async (id: string): Promise<Partial<Transport>> => {
   const removeTransport = await TransportModel.findOneAndUpdate({ _id: id }, { status: "ELIMINADO" }, {
     new: true,
   });
 
-  if(!removeTransport) throw Error("NO FOUND TRANSPORT")
+  if (!removeTransport) throw Error("NO FOUND TRANSPORT")
 
-  return formatTransportData(removeTransport);
+  return formatTransportData({ model: removeTransport });
 }
 export {
   listService,

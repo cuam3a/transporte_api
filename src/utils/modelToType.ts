@@ -1,3 +1,5 @@
+import DealershipModel from "../models/dealership.model";
+import DriverModel from "../models/driver.model";
 import { Dealership, Driver, Inspector, Transport } from "../types";
 
 export const formatInspectorData = (model: Inspector): Partial<Inspector> => {
@@ -18,7 +20,13 @@ export const formatInspectorData = (model: Inspector): Partial<Inspector> => {
     return inspectorType
 }
 
-export const formatTransportData = (model: Transport): Partial<Transport> => {
+type TransportProps = {
+    model: Transport,
+    driver?: Partial<Driver>
+    dealership?: Partial<Dealership>
+}
+
+export const formatTransportData = ({ model, driver, dealership }:TransportProps ): Partial<Transport> => {
     var transportType: Partial<Transport> = 
     { 
         id: model.id, 
@@ -28,11 +36,16 @@ export const formatTransportData = (model: Transport): Partial<Transport> => {
         idDealership: model.idDealership,
         idDriver: model.idDriver,
         status: model.status,
+        driver: driver,
+        dealership: dealership,
     }
     return transportType
 }
 
-export const formatDriverData = (model: Driver): Partial<Driver> => {
+export const formatDriverData = (model: Driver | null): Partial<Driver> => {
+    if(model === null)
+        return {}
+
     var driverType: Partial<Driver> = 
     { 
         id: model.id, 
@@ -48,7 +61,10 @@ export const formatDriverData = (model: Driver): Partial<Driver> => {
     return driverType
 }
 
-export const formatDealershipData = (model: Dealership): Partial<Dealership> => {
+export const formatDealershipData = (model: Dealership | null): Partial<Dealership> => {
+    if(model === null)
+        return {}
+
     var dealershipType: Partial<Dealership> = 
     { 
         id: model.id, 

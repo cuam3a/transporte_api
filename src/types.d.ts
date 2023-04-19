@@ -102,6 +102,7 @@ export type Driver = {
     ruc: string
     email: string
     status: State
+    
   }
 
   export type Transport = {
@@ -112,4 +113,6 @@ export type Driver = {
     idDealership: string
     idDriver: string
     status: State
+    driver: Partial<Driver> | null
+    dealership: Partial<Dealership> | null
   }
