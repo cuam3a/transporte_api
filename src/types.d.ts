@@ -50,6 +50,22 @@ export type DealershipResponse = {
     errorDetail: string
 }
 
+export type OperationalResponse = {
+  status: number
+  token: string
+  data: Partial<Operational>[] | Partial<Operational>
+  error: string
+  errorDetail: string
+}
+
+export type OperationalDetailResponse = {
+  status: number
+  token: string
+  data: Partial<OperationalDetail>[] | Partial<OperationalDetail>
+  error: string
+  errorDetail: string
+}
+
 export enum State { ACTIVO = 'ACTIVO', INACTIVO = 'INACTIVO', ELIMINADO = 'ELIMINADO' }
 
 export type LoginResponse = {
@@ -113,6 +129,32 @@ export type Driver = {
     idDealership: string
     idDriver: string
     status: State
+    driver: Partial<Driver> | null
+    dealership: Partial<Dealership> | null
+  }
+
+  export type Operational = {
+    id: string
+    name: string
+    date: string
+    time: string
+    latitud: number
+    longitude: number
+    status: State
+    idInspector: string
+    inspector: Partial<Inspector> | null
+  }
+
+  export type OperationalDetail = {
+    id: string
+    observation: string
+    nfc: string
+    status: State
+    idTransport: string
+    idDealership: string
+    idDriver: string
+    idOperational: string
+    transport: Partial<Transport> | null
     driver: Partial<Driver> | null
     dealership: Partial<Dealership> | null
   }

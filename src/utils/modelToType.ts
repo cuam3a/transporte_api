@@ -1,8 +1,11 @@
 import DealershipModel from "../models/dealership.model";
 import DriverModel from "../models/driver.model";
-import { Dealership, Driver, Inspector, Transport } from "../types";
+import { Dealership, Driver, Inspector, Operational, OperationalDetail, Transport } from "../types";
 
-export const formatInspectorData = (model: Inspector): Partial<Inspector> => {
+export const formatInspectorData = (model: Inspector | null): Partial<Inspector> => {
+    if(model === null)
+        return {}
+
     var inspectorType: Partial<Inspector> = 
     { 
         id: model.id, 
@@ -21,12 +24,15 @@ export const formatInspectorData = (model: Inspector): Partial<Inspector> => {
 }
 
 type TransportProps = {
-    model: Transport,
+    model: Transport | null,
     driver?: Partial<Driver>
     dealership?: Partial<Dealership>
 }
 
 export const formatTransportData = ({ model, driver, dealership }:TransportProps ): Partial<Transport> => {
+    if(model === null)
+        return {}
+
     var transportType: Partial<Transport> = 
     { 
         id: model.id, 
@@ -74,4 +80,53 @@ export const formatDealershipData = (model: Dealership | null): Partial<Dealersh
         status: model.status,
     }
     return dealershipType
+}
+
+type OperationalProps = {
+    model: Operational | null,
+    inspector?: Partial<Inspector>
+}
+
+export const formatOperationalData = ({ model, inspector }:OperationalProps ): Partial<Operational> => {
+    if(model === null)
+        return {}
+        
+    var operationalType: Partial<Operational> = 
+    { 
+        id: model.id, 
+        name: model.name,
+        date: model.date,
+        time: model.time,
+        latitud: model.latitud,
+        longitude: model.longitude,
+        status: model.status,
+        idInspector: model.idInspector,
+        inspector: inspector,
+    }
+    return operationalType
+}
+
+type OperationalDetailProps = {
+    model: OperationalDetail,
+    transport?: Partial<Transport>
+    driver?: Partial<Inspector>
+    dealership?: Partial<Dealership>
+}
+
+export const formatOperationalDetailData = ({ model, transport, driver, dealership }:OperationalDetailProps ): Partial<OperationalDetail> => {
+    var operationalDetailType: Partial<OperationalDetail> = 
+    { 
+        id: model.id, 
+        observation: model.observation,
+        nfc: model.nfc,
+        status: model.status,
+        idTransport: model.idTransport,
+        idDealership: model.idDealership,
+        idDriver: model.idDriver,
+        idOperational: model.idOperational,
+        transport: model.transport,
+        driver: driver,
+        dealership: dealership,
+    }
+    return operationalDetailType
 }
