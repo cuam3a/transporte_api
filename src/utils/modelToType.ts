@@ -99,6 +99,7 @@ export const formatOperationalData = ({ model, inspector }:OperationalProps ): P
         time: model.time,
         latitud: model.latitud,
         longitude: model.longitude,
+        ubication: model.ubication,
         status: model.status,
         idInspector: model.idInspector,
         inspector: inspector,

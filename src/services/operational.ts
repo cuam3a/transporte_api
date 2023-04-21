@@ -34,6 +34,7 @@ const addService = async (Operational: Partial<Operational>): Promise<Partial<Op
     time: Operational.time,
     latitud: Operational.latitud,
     longitude: Operational.longitude,
+    ubication: Operational.ubication,
     idInspector: Operational.idInspector,
     status: 'ACTIVO'
   });

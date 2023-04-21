@@ -15,9 +15,9 @@ const list = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR GET LIST INSPECTOR")
+    handleError(res, e.message)
   }
 }
 
@@ -50,9 +50,9 @@ const add = async ({ body } : Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e: any){
     console.log(e);
-    handleError(res, "ERROR ADD INSPECTOR")
+    handleError(res, e.message)
   }
 }
 

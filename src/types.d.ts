@@ -140,6 +140,7 @@ export type Driver = {
     time: string
     latitud: number
     longitude: number
+    ubication: string
     status: State
     idInspector: string
     inspector: Partial<Inspector> | null

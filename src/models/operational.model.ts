@@ -21,6 +21,9 @@ const OperationalSchema = new Schema<Operational>(
         longitude: {
             type: Number,
         },
+        ubication: {
+            type: String,
+        },
         idInspector: {
             type: String
         },
