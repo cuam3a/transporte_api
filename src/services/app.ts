@@ -2,6 +2,7 @@ import { Inspector } from "../types"
 import InspectorModel from "../models/inspector.model";
 import { verified } from "../utils/bcypt.handle";
 import { generateToken } from "../utils/jwt.handle";
+import { formatInspectorData } from "../utils/modelToType";
 
 const loginAppService = async ({ user, password }: Partial<Inspector>) => {
   const checkIs = await InspectorModel.findOne({ user });
@@ -12,8 +13,8 @@ const loginAppService = async ({ user, password }: Partial<Inspector>) => {
 
   if (!isCorrect) throw Error("USER OR PASSWORD INCORRECT");
 
-  const token = generateToken(`${checkIs._id}`);
-  return token;
+  //const token = generateToken(`${checkIs._id}`);
+  return formatInspectorData(checkIs);
 }
 
 export {

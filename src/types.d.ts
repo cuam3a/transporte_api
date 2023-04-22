@@ -71,6 +71,9 @@ export enum State { ACTIVO = 'ACTIVO', INACTIVO = 'INACTIVO', ELIMINADO = 'ELIMI
 export type LoginResponse = {
     status: number
     token: string
+    id: string
+    name: string
+    rol: string
 }
 
 export type ActionResponse = {

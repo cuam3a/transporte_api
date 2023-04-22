@@ -7,7 +7,10 @@ const live = async (req: Request, res: Response) => {
   console.log("ENTRO LIVE")
     const response: LoginResponse = {
       status: 200,
-      token: ''
+      token: '',
+      id: '',
+      name: '',
+      rol: ''
     }
 
     res.send(response);
@@ -17,10 +20,13 @@ const login = async ({ body }: Request, res: Response) => {
   const { user, password } = body;
   console.log({ user, password })
   try {
-    const userToken = await loginAppService({ user, password });
+    const userData = await loginAppService({ user, password });
     const response: LoginResponse = {
       status: 200,
-      token: ''
+      token: '',
+      id: userData.id ?? '',
+      name: userData.name ?? '',
+      rol: userData.rol ?? ''
     }
 
     res.send(response);

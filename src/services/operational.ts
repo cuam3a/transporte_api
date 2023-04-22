@@ -20,7 +20,7 @@ const listService = async (s: string): Promise<Partial<Operational>[]> => {
 
 const getByIdService = async (id: string): Promise<Partial<Operational>> => {
   const operational = await OperationaModel.findOne({ _id: id });
-  if (!operational) throw Error("NO FOUND TRANSPORT")
+  if (!operational) throw Error("NO FOUND OPERATIONAL")
 
   var Inspector = await InspectorModel.findOne<Inspector>({ _id: operational.idInspector });
   
