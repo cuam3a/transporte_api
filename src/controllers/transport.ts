@@ -33,9 +33,9 @@ const getById = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR GET INSPECTOR")
+    handleError(res, e.message)
   }
 }
 
@@ -50,9 +50,9 @@ const add = async ({ body } : Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR ADD INSPECTOR")
+    handleError(res, e.message)
   }
 }
 
@@ -66,9 +66,9 @@ const edit = async ({ body }: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR EDIT INSPECTOR")
+    handleError(res, e.message)
   }
 }
 

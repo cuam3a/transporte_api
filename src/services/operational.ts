@@ -22,7 +22,7 @@ const getByIdService = async (id: string): Promise<Partial<Operational>> => {
   const operational = await OperationaModel.findOne({ _id: id });
   if (!operational) throw Error("NO FOUND OPERATIONAL")
 
-  var Inspector = await InspectorModel.findOne<Inspector>({ _id: operational.idInspector });
+  var Inspector = operational.idInspector !== '' ? await InspectorModel.findOne<Inspector>({ _id: operational.idInspector }) : null;
   
   return formatOperationalData({ model: operational, inspector: formatInspectorData(Inspector) });
 }
@@ -69,9 +69,9 @@ const listDetailService = async (id: string): Promise<Partial<OperationalDetail>
   const operationalDetail = await OperationalDetailModel.find<OperationalDetail>({ status: 'ACTIVO', idOperational: id });
 
   const list = await Promise.all(operationalDetail.map(async (detail) => { 
-    var Transport = await TransportModel.findOne<Transport>({ _id: detail.idTransport });
-    var Driver = await DriverModel.findOne<Driver>({ _id: detail.idDriver });
-    var Dealership = await DealershipModel.findOne<Dealership>({ _id: detail.idDealership });
+    var Transport = detail.idTransport !== '' ? await TransportModel.findOne<Transport>({ _id: detail.idTransport }) : null;
+    var Driver = detail.idDriver !== '' ? await DriverModel.findOne<Driver>({ _id: detail.idDriver }) : null;
+    var Dealership = detail.idDealership !== '' ? await DealershipModel.findOne<Dealership>({ _id: detail.idDealership }) : null;
     return formatOperationalDetailData({ model: detail, transport: formatTransportData({model:Transport}), driver: formatDriverData(Driver), dealership: formatDealershipData(Dealership) });
   }));
 
@@ -82,9 +82,9 @@ const getByIdDetailService = async (id: string): Promise<Partial<OperationalDeta
   const detail = await OperationalDetailModel.findOne({ _id: id });
   if (!detail) throw Error("NO FOUND OPERATIONAL DETAIL")
 
-  var Transport = await TransportModel.findOne<Transport>({ _id: detail.idTransport });
-  var Driver = await DriverModel.findOne<Driver>({ _id: detail.idDriver });
-  var Dealership = await DealershipModel.findOne<Dealership>({ _id: detail.idDealership });
+  var Transport = detail.idTransport !== '' ? await TransportModel.findOne<Transport>({ _id: detail.idTransport }) : null;
+  var Driver = detail.idDriver !== '' ? await DriverModel.findOne<Driver>({ _id: detail.idDriver }) : null;
+  var Dealership = detail.idDealership !== '' ? await DealershipModel.findOne<Dealership>({ _id: detail.idDealership }) : null;
   return formatOperationalDetailData({ model: detail, transport: formatTransportData({model:Transport}), driver: formatDriverData(Driver), dealership: formatDealershipData(Dealership) });
 }
 
@@ -118,7 +118,7 @@ const getByUserService = async (id: string): Promise<Partial<Operational>[]> => 
   const operational = await OperationaModel.find<Operational>({ status: 'ACTIVO', idInspector: id });
 
   const list = await Promise.all(operational.map(async (operational) => { 
-    var Inspector = await InspectorModel.findOne<Inspector>({ _id: operational.idInspector });
+    var Inspector = operational.idInspector !== '' ?await InspectorModel.findOne<Inspector>({ _id: operational.idInspector }) : null;
     return formatOperationalData({ model: operational, inspector: formatInspectorData(Inspector) });
   }));
 

@@ -15,8 +15,8 @@ const getByIdService = async (id: string): Promise<Partial<Transport>> => {
   const transport = await TransportModel.findOne({ _id: id });
   if (!transport) throw Error("NO FOUND TRANSPORT")
 
-  var Driver = await DriverModel.findOne({ _id: transport.idDriver });
-  var Dealership = await DealershipModel.findOne({ _id: transport.idDealership });
+  var Driver = transport.idDriver != '' ? await DriverModel.findOne<Driver>({ _id: transport.idDriver }) : null;
+  var Dealership = transport.idDealership != '' ? await DealershipModel.findOne<Dealership>({ _id: transport.idDealership }) : null;
 
   return formatTransportData({ model: transport, driver: formatDriverData(Driver), dealership: formatDealershipData(Dealership) });
 }
