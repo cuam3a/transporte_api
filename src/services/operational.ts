@@ -20,7 +20,7 @@ const listService = async (s: string): Promise<Partial<Operational>[]> => {
 
 const getByIdService = async (id: string): Promise<Partial<Operational>> => {
   const operational = await OperationaModel.findOne({ _id: id });
-  if (!operational) throw Error("NO FOUND OPERATIONAL")
+  if (!operational) throw Error("NO EXITE OPERATIVO")
 
   var Inspector = operational.idInspector !== '' ? await InspectorModel.findOne<Inspector>({ _id: operational.idInspector }) : null;
   
@@ -39,7 +39,7 @@ const addService = async (Operational: Partial<Operational>): Promise<Partial<Op
     status: 'ACTIVO'
   });
 
-  if (!newOperational) throw Error("ERROR CREATE OPERATIONAL")
+  if (!newOperational) throw Error("ERROR CREAR OPERATIVO")
 
   return formatOperationalData({ model: newOperational });
 }
@@ -49,7 +49,7 @@ const editService = async (Operational: Partial<Operational>): Promise<Partial<O
     new: true,
   });
 
-  if (!updateOperational) throw Error("NO FOUND OPERATIONAL")
+  if (!updateOperational) throw Error("NO EXITE OPERATIVO")
 
   return formatOperationalData({ model: updateOperational });
 }
@@ -59,7 +59,7 @@ const removeService = async (id: string): Promise<Partial<Operational>> => {
     new: true,
   });
 
-  if (!removeOperational) throw Error("NO FOUND OPERATIONAL")
+  if (!removeOperational) throw Error("NO EXITE OPERATIVO")
 
   return formatOperationalData({ model: removeOperational });
 }
@@ -80,7 +80,7 @@ const listDetailService = async (id: string): Promise<Partial<OperationalDetail>
 
 const getByIdDetailService = async (id: string): Promise<Partial<OperationalDetail>> => {
   const detail = await OperationalDetailModel.findOne({ _id: id });
-  if (!detail) throw Error("NO FOUND OPERATIONAL DETAIL")
+  if (!detail) throw Error("NO EXISTE DETALLE OPERATIVO")
 
   var Transport = detail.idTransport !== '' ? await TransportModel.findOne<Transport>({ _id: detail.idTransport }) : null;
   var Driver = detail.idDriver !== '' ? await DriverModel.findOne<Driver>({ _id: detail.idDriver }) : null;
@@ -100,7 +100,7 @@ const addDetailService = async (OperationalDetail: Partial<OperationalDetail>): 
     status: 'ACTIVO'
   });
 
-  if (!newOperationalDetail) throw Error("ERROR CREATE OPERATIONAL DETAIL")
+  if (!newOperationalDetail) throw Error("ERROR AGREGAR OPERATIVO DETALLE")
 
   return formatOperationalDetailData({ model: newOperationalDetail });
 }
@@ -110,7 +110,7 @@ const removeDetailService = async (id: string): Promise<Partial<OperationalDetai
     new: true,
   });
 
-  if (!removeOperationalDetail) throw Error("NO FOUND TRANSPORT")
+  if (!removeOperationalDetail) throw Error("NO EXISTE DETALLE OPERATIVO")
 
   return formatOperationalDetailData({ model: removeOperationalDetail });
 }

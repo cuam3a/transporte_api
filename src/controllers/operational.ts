@@ -33,9 +33,9 @@ const getById = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR GET INSPECTOR")
+    handleError(res, e.message)
   }
 }
 
@@ -50,7 +50,7 @@ const add = async ({ body } : Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e: any){
+  catch(e:any){
     console.log(e);
     handleError(res, e.message)
   }
@@ -66,9 +66,9 @@ const edit = async ({ body }: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR EDIT INSPECTOR")
+    handleError(res, e.message)
   }
 }
 
@@ -83,9 +83,9 @@ const remove = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR REMOVE INSPECTOR")
+    handleError(res, e.message)
   }
 }
 
@@ -101,9 +101,9 @@ const listDetail = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR GET LIST INSPECTOR")
+    handleError(res, e.message)
   }
 }
 
@@ -119,9 +119,9 @@ const getByIdDetail = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR GET INSPECTOR")
+    handleError(res, e.message)
   }
 }
 
@@ -136,9 +136,9 @@ const addDetail = async ({ body } : Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR ADD INSPECTOR")
+    handleError(res, e.message)
   }
 }
 
@@ -153,9 +153,9 @@ const removeDetail = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR REMOVE INSPECTOR")
+    handleError(res, e.message)
   }
 }
 
@@ -171,9 +171,9 @@ const getByUser = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR GET LIST INSPECTOR")
+    handleError(res, e.message)
   }
 }
 
