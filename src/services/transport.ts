@@ -5,7 +5,7 @@ import DriverModel from "../models/driver.model";
 import DealershipModel from "../models/dealership.model";
 
 const listService = async (s: string): Promise<Partial<Transport>[]> => {
-  const transport = await TransportModel.find<Transport>({ status: 'ACTIVO', plateNumber: new RegExp(s) });
+  const transport = await TransportModel.find<Transport>({ status: 'ACTIVO', plateNumber: new RegExp(s, 'i') });
 
   const list = transport.map((transport) => { return formatTransportData({ model: transport }) });
   return transport.map((transport) => { return formatTransportData({ model: transport }) })
@@ -13,7 +13,17 @@ const listService = async (s: string): Promise<Partial<Transport>[]> => {
 
 const getByIdService = async (id: string): Promise<Partial<Transport>> => {
   const transport = await TransportModel.findOne({ _id: id });
-  if (!transport) throw Error("NO FOUND TRANSPORT")
+  if (!transport) throw Error("NO EXISTE TRANSPORTE")
+
+  var Driver = transport.idDriver != '' ? await DriverModel.findOne<Driver>({ _id: transport.idDriver }) : null;
+  var Dealership = transport.idDealership != '' ? await DealershipModel.findOne<Dealership>({ _id: transport.idDealership }) : null;
+
+  return formatTransportData({ model: transport, driver: formatDriverData(Driver), dealership: formatDealershipData(Dealership) });
+}
+
+const getByNFCService = async (nfc: string): Promise<Partial<Transport>> => {
+  const transport = await TransportModel.findOne({ nfc: nfc });
+  if (!transport) throw Error("NO EXISTE TRANSPORTE")
 
   var Driver = transport.idDriver != '' ? await DriverModel.findOne<Driver>({ _id: transport.idDriver }) : null;
   var Dealership = transport.idDealership != '' ? await DealershipModel.findOne<Dealership>({ _id: transport.idDealership }) : null;
@@ -22,6 +32,9 @@ const getByIdService = async (id: string): Promise<Partial<Transport>> => {
 }
 
 const addService = async (Transport: Partial<Transport>): Promise<Partial<Transport>> => {
+  const existNFC = await TransportModel.find<Transport>({ status: 'ACTIVO', nfc: Transport.nfc });
+  if (existNFC) throw Error(`YA EXISTE TRANSPORTE CON NFC ${Transport.nfc}`)
+
   const newTransport = await TransportModel.create({
     plateNumber: Transport.plateNumber,
     soat: Transport.soat,
@@ -31,7 +44,7 @@ const addService = async (Transport: Partial<Transport>): Promise<Partial<Transp
     status: 'ACTIVO'
   });
 
-  if (!newTransport) throw Error("ERROR CREATE TRANSPORT")
+  if (!newTransport) throw Error("ERROR CREAR TRANSPORTE")
 
   return formatTransportData({ model: newTransport });
 }
@@ -41,7 +54,7 @@ const editService = async (Transport: Partial<Transport>): Promise<Partial<Trans
     new: true,
   });
 
-  if (!updateTransport) throw Error("NO FOUND TRANSPORT")
+  if (!updateTransport) throw Error("NO EXISTE TRANSPORTE")
 
   return formatTransportData({ model: updateTransport });
 }
@@ -51,7 +64,7 @@ const removeService = async (id: string): Promise<Partial<Transport>> => {
     new: true,
   });
 
-  if (!removeTransport) throw Error("NO FOUND TRANSPORT")
+  if (!removeTransport) throw Error("NO EXISTE TRANSPORTE")
 
   return formatTransportData({ model: removeTransport });
 }
@@ -60,5 +73,6 @@ export {
   addService,
   getByIdService,
   editService,
-  removeService
+  removeService,
+  getByNFCService
 }

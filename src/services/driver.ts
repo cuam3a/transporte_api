@@ -3,7 +3,7 @@ import DriverModel from "../models/driver.model";
 import { formatDriverData } from "../utils/modelToType";
 
 const listService = async (s : string) : Promise<Partial<Driver>[]>=> {
-  const driver = await DriverModel.find<Driver>({ status: 'ACTIVO', name: new RegExp(s) }); 
+  const driver = await DriverModel.find<Driver>({ status: 'ACTIVO', name: new RegExp(s, 'i') }); 
   return driver.map(driver => { return formatDriverData(driver) })
 }
 

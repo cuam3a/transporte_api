@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Inspector, TransportResponse } from "../types"
-import { addService, editService, getByIdService, listService, removeService } from "../services/transport";
+import { addService, editService, getByIdService, getByNFCService, listService, removeService } from "../services/transport";
 import { handleError } from "../utils/error.handle";
 
 const list = async (req: Request, res: Response) => {
@@ -26,6 +26,24 @@ const getById = async (req: Request, res: Response) => {
     const { id } = req.params
     console.log(id)
     let data = await getByIdService(id);
+    const response: Partial<TransportResponse> = {
+      status: 200,
+      token: '',
+      data: data
+    }
+    res.send(response);
+  }
+  catch(e:any){
+    console.log(e);
+    handleError(res, e.message)
+  }
+}
+
+const getByNFC = async (req: Request, res: Response) => {
+  try {
+    const { nfc } = req.params
+    console.log(nfc)
+    let data = await getByNFCService(nfc);
     const response: Partial<TransportResponse> = {
       status: 200,
       token: '',
@@ -93,5 +111,6 @@ export {
   add,
   getById,
   edit,
-  remove
+  remove,
+  getByNFC
 }

@@ -4,7 +4,7 @@ import { encrypt } from "../utils/bcypt.handle";
 import { formatInspectorData } from "../utils/modelToType";
 
 const listService = async (s : string) : Promise<Partial<Inspector>[]>=> {
-  const inspectors = await InspectorModel.find<Inspector>({ status: 'ACTIVO', name: new RegExp(s) }); 
+  const inspectors = await InspectorModel.find<Inspector>({ status: 'ACTIVO', name: new RegExp(s, 'i') }); 
   return inspectors.map(inspector => { return formatInspectorData(inspector) })
 }
 

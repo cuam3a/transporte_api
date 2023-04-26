@@ -3,7 +3,7 @@ import DealershipModel from "../models/dealership.model";
 import { formatDealershipData } from "../utils/modelToType";
 
 const listService = async (s : string) : Promise<Partial<Dealership>[]>=> {
-  const dealership = await DealershipModel.find<Dealership>({ status: 'ACTIVO', name: new RegExp(s) }); 
+  const dealership = await DealershipModel.find<Dealership>({ status: 'ACTIVO', name: new RegExp(s, 'i') }); 
   return dealership.map(dealership => { return formatDealershipData(dealership) })
 }
 
