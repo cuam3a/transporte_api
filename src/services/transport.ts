@@ -7,8 +7,15 @@ import DealershipModel from "../models/dealership.model";
 const listService = async (s: string): Promise<Partial<Transport>[]> => {
   const transport = await TransportModel.find<Transport>({ status: 'ACTIVO', plateNumber: new RegExp(s, 'i') });
 
-  const list = transport.map((transport) => { return formatTransportData({ model: transport }) });
-  return transport.map((transport) => { return formatTransportData({ model: transport }) })
+  // const list = transport.map((transport) => { return formatTransportData({ model: transport }) });
+  // return transport.map((transport) => { return formatTransportData({ model: transport }) })
+
+  const list = await Promise.all(transport.map(async (transport) => { 
+    var driver = await DriverModel.findOne<Driver>({ _id: transport.idDriver });
+    return formatTransportData({ model: transport, driver: formatDriverData(driver) });
+  }));
+
+  return list
 }
 
 const getByIdService = async (id: string): Promise<Partial<Transport>> => {
