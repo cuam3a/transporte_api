@@ -154,6 +154,7 @@ export type Driver = {
     observation: string
     nfc: string
     status: State
+    idInspector: string
     idTransport: string
     idDealership: string
     idDriver: string

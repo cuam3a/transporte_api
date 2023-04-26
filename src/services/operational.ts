@@ -96,6 +96,7 @@ const addDetailService = async (OperationalDetail: Partial<OperationalDetail>): 
     idDealership: OperationalDetail.idDealership,
     idDriver: OperationalDetail.idDriver,
     idOperational: OperationalDetail.idOperational,
+    idInspector: OperationalDetail.idInspector,
     status: 'ACTIVO'
   });
 

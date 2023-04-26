@@ -23,6 +23,10 @@ const OperationalDetailSchema = new Schema<OperationalDetail>(
             type: String,
             required: true,
         },
+        idInspector: {
+            type: String,
+            required: true,
+        },
         nfc:{
             type: String
         },

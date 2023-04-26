@@ -124,6 +124,7 @@ export const formatOperationalDetailData = ({ model, transport, driver, dealersh
         idTransport: model.idTransport,
         idDealership: model.idDealership,
         idDriver: model.idDriver,
+        idInspector: model.idInspector,
         idOperational: model.idOperational,
         transport: model.transport,
         driver: driver,
