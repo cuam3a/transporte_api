@@ -9,7 +9,7 @@ router.put("/:id", edit);
 router.delete("/:id", remove);
 router.get("/detail/:s?", listDetail);
 router.get("/detail/one/:id", getByIdDetail)
-router.post("/detail/:id", addDetail);
+router.post("/detail/", addDetail);
 router.delete("/detail/:id", removeDetail);
 router.get("/user/:id", getByUser);
 export { router };
