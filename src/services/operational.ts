@@ -92,7 +92,7 @@ const addDetailService = async (OperationalDetail: Partial<OperationalDetail>): 
   const newOperationalDetail = await OperationalDetailModel.create({
     observation: OperationalDetail.observation,
     nfc: OperationalDetail.nfc,
-    idTransport: OperationalDetail.nfc,
+    idTransport: OperationalDetail.idTransport,
     idDealership: OperationalDetail.idDealership,
     idDriver: OperationalDetail.idDriver,
     idOperational: OperationalDetail.idOperational,
