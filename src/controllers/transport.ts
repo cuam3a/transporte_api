@@ -101,9 +101,9 @@ const remove = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR REMOVE INSPECTOR")
+    handleError(res, e.message)
   }
 }
 export {

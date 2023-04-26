@@ -6,14 +6,13 @@ import { formatInspectorData } from "../utils/modelToType";
 
 const loginAppService = async ({ user, password }: Partial<Inspector>) => {
   const checkIs = await InspectorModel.findOne({ user });
-  if (!checkIs) throw Error("USER OR PASSWORD INCORRECT");
+  if (!checkIs) throw Error("USUARIO O CONTRASEÑA INCORRECTA");
 
-  const passwordHash = checkIs.password;
-  const isCorrect = await verified(password ?? '', passwordHash);
+  // const passwordHash = checkIs.password;
+  // const isCorrect = await verified(password ?? '', passwordHash);
 
-  if (!isCorrect) throw Error("USER OR PASSWORD INCORRECT");
+  if(checkIs.password != password)throw Error("USUARIO O CONTRASEÑA INCORRECTA");
 
-  //const token = generateToken(`${checkIs._id}`);
   return formatInspectorData(checkIs);
 }
 

@@ -9,7 +9,7 @@ const listService = async (s : string) : Promise<Partial<Dealership>[]>=> {
 
 const getByIdService = async (id: string) : Promise<Partial<Dealership>> => {
   const Dealership = await DealershipModel.findOne({ _id: id });
-  if(!Dealership) throw Error("NO FOUND TRANSPORT")
+  if(!Dealership) throw Error("NO EXISTE CONSESIONARIA")
 
   return Dealership;
 }
@@ -22,7 +22,7 @@ const addService = async (Dealership : Partial<Dealership>) : Promise<Partial<De
     status: 'ACTIVO'
   });
 
-  if(!newDealership) throw Error("ERROR CREATE TRANSPORT")
+  if(!newDealership) throw Error("ERROR CREAR CONSESIONARIA")
   
   return formatDealershipData(newDealership);
 }
@@ -32,7 +32,7 @@ const editService = async (Dealership : Partial<Dealership>) :Promise<Partial<De
     new: true,
   });
 
-  if(!updateDealership) throw Error("NO FOUND TRANSPORT")
+  if(!updateDealership) throw Error("NO EXISTE CONSESIONARIA")
   
   return formatDealershipData(updateDealership);
 }
@@ -42,7 +42,7 @@ const removeService = async (id: string) :Promise<Partial<Dealership>>=> {
     new: true,
   });
 
-  if(!removeDealership) throw Error("NO FOUND TRANSPORT")
+  if(!removeDealership) throw Error("NO EXISTE CONSESIONARIA")
 
   return formatDealershipData(removeDealership);
 }

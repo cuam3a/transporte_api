@@ -15,9 +15,9 @@ const list = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR GET LIST DEALERSHIP")
+    handleError(res, e.message)
   }
 }
 
@@ -33,9 +33,9 @@ const getById = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR GET DEALERSHIP")
+    handleError(res, e.message)
   }
 }
 
@@ -50,9 +50,9 @@ const add = async ({ body } : Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR ADD DEALERSHIP")
+    handleError(res, e.message)
   }
 }
 
@@ -66,9 +66,9 @@ const edit = async ({ body }: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR EDIT DEALERSHIP")
+    handleError(res, e.message)
   }
 }
 
@@ -83,9 +83,9 @@ const remove = async (req: Request, res: Response) => {
     }
     res.send(response);
   }
-  catch(e){
+  catch(e:any){
     console.log(e);
-    handleError(res, "ERROR REMOVE DEALERSHIP")
+    handleError(res, e.message)
   }
 }
 export {

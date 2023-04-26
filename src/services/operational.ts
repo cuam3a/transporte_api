@@ -8,7 +8,7 @@ import OperationalDetailModel from "../models/operationalDetail.model";
 import DriverModel from "../models/driver.model";
 
 const listService = async (s: string): Promise<Partial<Operational>[]> => {
-  const operational = await OperationaModel.find<Operational>({ status: 'ACTIVO', name: new RegExp(s, 'i') });
+  const operational = await OperationaModel.find<Operational>({ status: 'ACTIVO', ubication: new RegExp(s, 'i') });
 
   const list = await Promise.all(operational.map(async (operational) => { 
     var Inspector = await InspectorModel.findOne<Inspector>({ _id: operational.idInspector });

@@ -9,7 +9,7 @@ const listService = async (s : string) : Promise<Partial<Driver>[]>=> {
 
 const getByIdService = async (id: string) : Promise<Partial<Driver>> => {
   const driver = await DriverModel.findOne({ _id: id });
-  if(!driver) throw Error("NO FOUND DRIVER")
+  if(!driver) throw Error("NO EXISTE CONDUCTOR")
 
   return driver;
 }
@@ -26,7 +26,7 @@ const addService = async (Driver : Partial<Driver>) : Promise<Partial<Driver>>=>
     status: 'ACTIVO'
   });
 
-  if(!newDriver) throw Error("ERROR CREATE DRIVER")
+  if(!newDriver) throw Error("ERROR CREAR CONDUCTOR")
   
   return formatDriverData(newDriver);
 }
@@ -36,7 +36,7 @@ const editService = async (Driver : Partial<Driver>) :Promise<Partial<Driver>>=>
     new: true,
   });
 
-  if(!updateDriver) throw Error("NO FOUND DRIVER")
+  if(!updateDriver) throw Error("NO EXISTE CONDUCTOR")
   
   return formatDriverData(updateDriver);
 }
@@ -46,7 +46,7 @@ const removeService = async (id: string) :Promise<Partial<Driver>>=> {
     new: true,
   });
 
-  if(!removeDriver) throw Error("NO FOUND DRIVER")
+  if(!removeDriver) throw Error("NO EXISTE CONDUCTOR")
 
   return formatDriverData(removeDriver);
 }

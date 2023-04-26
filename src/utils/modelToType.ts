@@ -1,3 +1,4 @@
+import { Model } from "mongoose";
 import DealershipModel from "../models/dealership.model";
 import DriverModel from "../models/driver.model";
 import { Dealership, Driver, Inspector, Operational, OperationalDetail, Transport } from "../types";
@@ -17,6 +18,7 @@ export const formatInspectorData = (model: Inspector | null): Partial<Inspector>
         gender: model.gender,
         email: model.email,
         user: model.user,
+        password: model.password,
         rol: model.rol,
         status: model.status,
     }

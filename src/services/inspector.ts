@@ -10,7 +10,7 @@ const listService = async (s : string) : Promise<Partial<Inspector>[]>=> {
 
 const getByIdService = async (id: string) : Promise<Partial<Inspector>> => {
   const inspector = await InspectorModel.findOne({ _id: id });
-  if(!inspector) throw Error("NO FOUND USER")
+  if(!inspector) throw Error("NO EXISTE INSPECTOR")
 
   return inspector;
 }
@@ -25,12 +25,12 @@ const addService = async (Inspector : Partial<Inspector>) : Promise<Partial<Insp
     gender: Inspector.gender,
     birthDate: Inspector.birthDate,
     user: Inspector.user,
-    password: passHash,
+    password: Inspector.password,
     rol: Inspector.rol,
     status: 'ACTIVO'
   });
 
-  if(!newInspector) throw Error("ERROR CREATE USER")
+  if(!newInspector) throw Error("ERROR CREAR INSPECTOR")
   
   return formatInspectorData(newInspector);
 }
@@ -40,7 +40,7 @@ const editService = async (Inspector : Partial<Inspector>) :Promise<Partial<Insp
     new: true,
   });
 
-  if(!updateInspector) throw Error("NO FOUND USER")
+  if(!updateInspector) throw Error("NO EXISTE INSPECTOR")
   
   return formatInspectorData(updateInspector);
 }
@@ -50,7 +50,7 @@ const removeService = async (id: string) :Promise<Partial<Inspector>>=> {
     new: true,
   });
 
-  if(!removeInspector) throw Error("NO FOUND USER")
+  if(!removeInspector) throw Error("NO EXISTE INSPECTOR")
 
   return formatInspectorData(removeInspector);
 }
