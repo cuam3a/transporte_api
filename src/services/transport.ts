@@ -39,7 +39,7 @@ const getByNFCService = async (nfc: string): Promise<Partial<Transport>> => {
 }
 
 const addService = async (Transport: Partial<Transport>): Promise<Partial<Transport>> => {
-  const existNFC = await TransportModel.find<Transport>({ status: 'ACTIVO', nfc: Transport.nfc });
+  const existNFC = await TransportModel.findOne({ status: 'ACTIVO', nfc: Transport.nfc });
   if (existNFC) throw Error(`YA EXISTE TRANSPORTE CON NFC ${Transport.nfc}`)
 
   const newTransport = await TransportModel.create({
