@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { LoginResponse, UserResponse, RequestExt } from "../types";
-import { loginAppService } from "../services/app";
+import { LoginResponse, UserResponse, RequestExt, OperationalResponse, OperationalDetailResponse } from "../types";
+import { listOperationalDetailService, listOperationalService, loginAppService } from "../services/app";
 import { handleError } from "../utils/error.handle";
 
 const live = async (req: Request, res: Response) => {
@@ -54,8 +54,46 @@ const userInformation = async ({ idUser }: RequestExt, res: Response) => {
   }
 };
 
+const reportOperational = async (req: RequestExt, res: Response) => {
+  try {
+    const { s } = req.params
+    let data = await listOperationalService(s);
+    console.log(data)
+    const response: Partial<OperationalResponse> = {
+      status: 200,
+      token: '',
+      data: data,
+    }
+    res.send(response);
+  }
+  catch(e:any){
+    console.log(e);
+    handleError(res, e.message)
+  }
+}
+
+const reportOperationalDetail = async ({ body }: Request, res: Response) => {
+  try {
+    const { id, dni, plateNumber } = body
+    let data = await listOperationalDetailService(id,dni,plateNumber);
+    console.log(data)
+    const response: Partial<OperationalDetailResponse> = {
+      status: 200,
+      token: '',
+      data: data,
+    }
+    res.send(response);
+  }
+  catch(e:any){
+    console.log(e);
+    handleError(res, e.message)
+  }
+}
+
 export {
   live,
   login,
   userInformation,
+  reportOperational,
+  reportOperationalDetail,
 }
